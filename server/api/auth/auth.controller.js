@@ -74,15 +74,17 @@ async function signIn(req, res) {
       .getSessionToken(user)
 
    res.cookie(
-    'authToken',
-    token,
-    {
-      maxAge: 24 * 60 * 60 * 1000,
-      httpOnly: true,
-      sameSite: true,
-      secure: true,
-    }
-  )
+      'authToken',
+      token,
+      {
+        maxAge: 24 * 60 * 60 * 1000,
+        httpOnly: true,
+        sameSite: true,
+        secure: true,
+      }
+    )
+
+    delete user.password
 
     return res.json({
       user
@@ -149,7 +151,7 @@ async function signUp(req, res) {
       .getSessionToken(newUser)
 
     res.cookie(
-      'token',
+      'authToken',
       token,
       {
         maxAge: 24 * 60 * 60 * 1000,
@@ -158,6 +160,8 @@ async function signUp(req, res) {
         secure: true,
       }
     )
+
+    delete newUser.password
 
     return res.json({
       user: newUser

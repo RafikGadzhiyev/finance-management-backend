@@ -8,7 +8,7 @@ const cookieParser = require('cookie-parser')
 
 const app = express()
 
-const authRoute = require('./api/auth')
+const authRoute = require('./server/api/auth')
 
 const {
   PORT
