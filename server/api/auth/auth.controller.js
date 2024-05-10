@@ -17,8 +17,11 @@ async function getUpToDateUser(req, res) {
     delete user.iat
     delete user.exp
 
+
     const refreshedToken = authHelper
       .getSessionToken(user)
+
+    req.user = user;
 
     res.cookie(
       'authToken',
@@ -73,7 +76,9 @@ async function signIn(req, res) {
     const token = authHelper
       .getSessionToken(user)
 
-   res.cookie(
+    req.user = user
+
+    res.cookie(
       'authToken',
       token,
       {
@@ -149,6 +154,8 @@ async function signUp(req, res) {
 
     const token = authHelper
       .getSessionToken(newUser)
+
+    req.user = user;
 
     res.cookie(
       'authToken',
