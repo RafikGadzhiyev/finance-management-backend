@@ -8,11 +8,22 @@ const authHelper = require('./auth.helper')
 const SALT = +process.env.SALT_ROUNDS
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY
 
-async function getUpToDateUser(req, res) {
+async function updateUserSessionToken(req, res) {
   try {
-    const token = req.cookies.authToken
+    const {
+      authToken
+    } = req.body
 
-    const user = jwt.verify(token, JWT_SECRET_KEY)
+    if (!authToken) {
+      return res
+        .status(401)
+        .json({
+          error: 'Unauthorized',
+          description: "User was not authenticated!"
+        })
+    }
+
+    const user = jwt.verify(authToken, JWT_SECRET_KEY)
 
     delete user.iat
     delete user.exp
@@ -23,6 +34,8 @@ async function getUpToDateUser(req, res) {
 
     req.user = user;
 
+    // TODO: Cookie creation util
+    //? Maybe just create cookie options as const
     res.cookie(
       'authToken',
       refreshedToken,
@@ -72,6 +85,8 @@ async function signIn(req, res) {
     if (!isMatch) {
       return res.status(401).send('Incorrect credentials')
     }
+
+    delete user.password
 
     const token = authHelper
       .getSessionToken(user)
@@ -152,10 +167,12 @@ async function signUp(req, res) {
         })
     }
 
+    delete newUser.password
+
     const token = authHelper
       .getSessionToken(newUser)
 
-    req.user = user;
+    req.user = newUser;
 
     res.cookie(
       'authToken',
@@ -182,7 +199,7 @@ async function signUp(req, res) {
 }
 
 module.exports = {
-  getUpToDateUser,
+  updateUserSessionToken,
   signIn,
   signUp
 }
