@@ -15,9 +15,14 @@ const UserSchema = new Schema({
   userPlan: {
     type: String,
     enum: Object.values(USER_PLANS),
-    default: USER_PLANS.free
+    default: USER_PLANS.FREE
   },
   password: String,
+  paymentSpecific: {
+    country: String,
+    currency: String,
+  },
+  _transactions: [String],
   dtCreated: {
     type: Date,
     default: Date.now
@@ -38,6 +43,16 @@ UserSchema.pre(
     this.dtUpdated = Date.now()
 
     return next()
+  }
+)
+
+UserSchema.virtual(
+  'transactions',
+  {
+    localField: "_transactions",
+    foreignField: "code",
+    ref: "Transaction",
+    justOne: false
   }
 )
 
