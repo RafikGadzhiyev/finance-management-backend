@@ -9,6 +9,7 @@ const cookieParser = require('cookie-parser')
 const app = express()
 
 const authRoute = require('./server/api/auth')
+const transactionRoute = require('./server/api/transaction')
 
 const {
   PORT
@@ -25,10 +26,8 @@ app.use(
 app.use(cookieParser())
 app.use(express.json())
 
-app.use(
-  '/auth',
-  authRoute
-)
+app.use('/auth', authRoute)
+app.use('/transaction', transactionRoute)
 
 app.get('/', (req, res) => {
   return res.send('Hello, world!')
