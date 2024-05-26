@@ -4,9 +4,9 @@ const router = express.Router()
 
 const controller = require('./auth.controller')
 
-router.get(
-  '/get_up_to_date_user',
-  controller.getUpToDateUser
+router.post(
+  '/update_user_session_token',
+  controller.updateUserSessionToken
 )
 
 router.post(
