@@ -42,8 +42,8 @@ async function updateUserSessionToken(req, res) {
       {
         maxAge: 24 * 60 * 60 * 1000,
         httpOnly: true,
-        sameSite: true,
-        secure: true,
+        // sameSite: true,
+        // secure: true,
       }
     )
 
@@ -100,7 +100,7 @@ async function signIn(req, res) {
         maxAge: 24 * 60 * 60 * 1000,
         httpOnly: true,
         // sameSite: true,
-        secure: true,
+        // secure: true,
       }
     )
 
@@ -181,7 +181,7 @@ async function signUp(req, res) {
         maxAge: 24 * 60 * 60 * 1000,
         httpOnly: true,
         // sameSite: true,
-        secure: true,
+        // secure: true,
       }
     )
 
