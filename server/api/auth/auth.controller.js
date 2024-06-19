@@ -39,12 +39,12 @@ async function updateUserSessionToken(req, res) {
     res.cookie(
       'authToken',
       refreshedToken,
-      {
-        maxAge: 24 * 60 * 60 * 1000,
-        httpOnly: true,
-        sameSite: 'None',
-        secure: true,
-      }
+      // {
+      //   maxAge: 24 * 60 * 60 * 1000,
+      //   httpOnly: true,
+      //   sameSite: 'None',
+      //   secure: true,
+      // }
     )
 
     return res.json({
@@ -96,12 +96,12 @@ async function signIn(req, res) {
     res.cookie(
       'authToken',
       token,
-      {
-        maxAge: 24 * 60 * 60 * 1000,
-        httpOnly: true,
-        sameSite: 'None',
-        secure: true,
-      }
+      // {
+      //   maxAge: 24 * 60 * 60 * 1000,
+      //   httpOnly: true,
+      //   sameSite: 'None',
+      //   secure: true,
+      // }
     )
 
     delete user.password
@@ -177,12 +177,12 @@ async function signUp(req, res) {
     res.cookie(
       'authToken',
       token,
-      {
-        maxAge: 24 * 60 * 60 * 1000,
-        httpOnly: true,
-        sameSite: 'None',
-        secure: true,
-      }
+      // {
+      //   maxAge: 24 * 60 * 60 * 1000,
+      //   httpOnly: true,
+      //   sameSite: 'None',
+      //   secure: true,
+      // }
     )
 
     delete newUser.password
