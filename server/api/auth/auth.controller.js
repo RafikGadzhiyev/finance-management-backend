@@ -44,7 +44,6 @@ async function updateUserSessionToken(req, res) {
         httpOnly: true,
         sameSite: 'None',
         secure: true,
-        domain: '.vercel.app'
       }
     )
 
@@ -102,7 +101,6 @@ async function signIn(req, res) {
         httpOnly: true,
         sameSite: 'None',
         secure: true,
-        domain: '.vercel.app',
       }
     )
 
@@ -184,7 +182,6 @@ async function signUp(req, res) {
         httpOnly: true,
         sameSite: 'None',
         secure: true,
-        domain: '.vercel.app'
       }
     )
 
